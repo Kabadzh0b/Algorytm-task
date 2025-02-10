@@ -1,8 +1,10 @@
+// change n to test different cases
 var n = 10;
 var generateNonExisting = function (n) {
-    //const nonExisting1 = Math.floor(Math.random() * n);
-    //const nonExisting2 = Math.floor(Math.random() * n);
-    var nonExisting1 = 1;
+    //   const nonExisting1 = Math.floor(Math.random() * n) + 1;
+    //   const nonExisting2 = Math.floor(Math.random() * n) + 1;
+    // case when our hidden numbers are in the borders
+    var nonExisting1 = n - 1;
     var nonExisting2 = n;
     if (nonExisting1 === nonExisting2) {
         return generateNonExisting(n);
@@ -39,20 +41,34 @@ var findMissingNumbers = function (array, start, end) {
     if (array[mid + 1] - array[mid] === 2) {
         missingNumbers.push(array[mid] + 1);
     }
+    if (array[mid + 1] - array[mid] === 3) {
+        missingNumbers.push(array[mid] + 1);
+        missingNumbers.push(array[mid] + 2);
+    }
     return;
 };
 var checkBorders = function (array) {
     if (array[0] === 2) {
         missingNumbers.push(1);
     }
+    if (array[0] === 3) {
+        missingNumbers.push(1);
+        missingNumbers.push(2);
+    }
     if (array[array.length - 1] === array.length + 1) {
+        missingNumbers.push(array.length + 2);
+    }
+    if (array[array.length - 1] === array.length) {
+        missingNumbers.push(array.length + 1);
         missingNumbers.push(array.length + 2);
     }
 };
 var main = function () {
     var array = generateArray(n);
     if (!array.length) {
-        console.error("array is empty");
+        console.error("we are missing all numbers");
+        missingNumbers.push(1);
+        missingNumbers.push(2);
         return;
     }
     checkBorders(array);

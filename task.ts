@@ -1,9 +1,11 @@
+// change n to test different cases
 const n = 10;
 
 const generateNonExisting = (n: number) => {
-  //const nonExisting1 = Math.floor(Math.random() * n);
-  //const nonExisting2 = Math.floor(Math.random() * n);
-  const nonExisting1 = 1;
+  //   const nonExisting1 = Math.floor(Math.random() * n) + 1;
+  //   const nonExisting2 = Math.floor(Math.random() * n) + 1;
+  // case when our hidden numbers are in the borders
+  const nonExisting1 = n - 1;
   const nonExisting2 = n;
   if (nonExisting1 === nonExisting2) {
     return generateNonExisting(n);
@@ -51,6 +53,10 @@ const findMissingNumbers = (
   if (array[mid + 1] - array[mid] === 2) {
     missingNumbers.push(array[mid] + 1);
   }
+  if (array[mid + 1] - array[mid] === 3) {
+    missingNumbers.push(array[mid] + 1);
+    missingNumbers.push(array[mid] + 2);
+  }
   return;
 };
 
@@ -58,7 +64,15 @@ const checkBorders = (array: number[]) => {
   if (array[0] === 2) {
     missingNumbers.push(1);
   }
+  if (array[0] === 3) {
+    missingNumbers.push(1);
+    missingNumbers.push(2);
+  }
   if (array[array.length - 1] === array.length + 1) {
+    missingNumbers.push(array.length + 2);
+  }
+  if (array[array.length - 1] === array.length) {
+    missingNumbers.push(array.length + 1);
     missingNumbers.push(array.length + 2);
   }
 };
