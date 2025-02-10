@@ -2,11 +2,11 @@
 const n = 10;
 
 const generateNonExisting = (n: number) => {
-  //   const nonExisting1 = Math.floor(Math.random() * n) + 1;
-  //   const nonExisting2 = Math.floor(Math.random() * n) + 1;
+  const nonExisting1 = Math.floor(Math.random() * n) + 1;
+  const nonExisting2 = Math.floor(Math.random() * n) + 1;
   // case when our hidden numbers are in the borders
-  const nonExisting1 = n - 1;
-  const nonExisting2 = n;
+  //   const nonExisting1 = n - 1;
+  //   const nonExisting2 = n;
   if (nonExisting1 === nonExisting2) {
     return generateNonExisting(n);
   }
