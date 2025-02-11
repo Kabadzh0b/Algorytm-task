@@ -1,5 +1,8 @@
 {
   "type": "module",
+  "scripts": {
+    "start": "tsc task.ts --outDir dist && node renameToCJS && node dist/task.cjs"
+  },
   "dependencies": {
     "typescript": "^5.7.3"
   },

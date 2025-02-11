@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateNonExisting = void 0;
+exports.main = exports.checkBorders = exports.findMissingNumbers = exports.generateArray = exports.generateNonExisting = void 0;
 // change n to test different cases
 var n = 10;
 var generateNonExisting = function (n) {
@@ -27,8 +27,9 @@ var generateArray = function (n) {
     console.log(array);
     return array;
 };
+exports.generateArray = generateArray;
 var missingNumbers = [];
-var findMissingNumbers = function (array, start, end) {
+var findMissingNumbers = function (array, missingNumbers, start, end) {
     if (start > end) {
         return;
     }
@@ -40,8 +41,8 @@ var findMissingNumbers = function (array, start, end) {
     }
     // array is not good
     var mid = Math.floor((start + end) / 2);
-    findMissingNumbers(array, start, mid);
-    findMissingNumbers(array, mid + 1, end);
+    (0, exports.findMissingNumbers)(array, missingNumbers, start, mid);
+    (0, exports.findMissingNumbers)(array, missingNumbers, mid + 1, end);
     if (array[mid + 1] - array[mid] === 2) {
         missingNumbers.push(array[mid] + 1);
     }
@@ -51,7 +52,8 @@ var findMissingNumbers = function (array, start, end) {
     }
     return;
 };
-var checkBorders = function (array) {
+exports.findMissingNumbers = findMissingNumbers;
+var checkBorders = function (array, missingNumbers) {
     if (array[0] === 2) {
         missingNumbers.push(1);
     }
@@ -67,16 +69,18 @@ var checkBorders = function (array) {
         missingNumbers.push(array.length + 2);
     }
 };
+exports.checkBorders = checkBorders;
 var main = function () {
-    var array = generateArray(n);
+    var array = (0, exports.generateArray)(n);
     if (!array.length) {
         console.error("we are missing all numbers");
         missingNumbers.push(1);
         missingNumbers.push(2);
         return;
     }
-    checkBorders(array);
-    findMissingNumbers(array, 0, array.length - 1);
+    (0, exports.checkBorders)(array, missingNumbers);
+    (0, exports.findMissingNumbers)(array, missingNumbers, 0, array.length - 1);
     console.log(missingNumbers);
 };
-main();
+exports.main = main;
+(0, exports.main)();
