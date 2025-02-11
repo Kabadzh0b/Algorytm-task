@@ -1,7 +1,7 @@
 // change n to test different cases
 const n = 10;
 
-const generateNonExisting = (n: number) => {
+export const generateNonExisting = (n: number): number[] => {
   const nonExisting1 = Math.floor(Math.random() * n) + 1;
   const nonExisting2 = Math.floor(Math.random() * n) + 1;
   // case when our hidden numbers are in the borders
@@ -13,7 +13,7 @@ const generateNonExisting = (n: number) => {
   return [nonExisting1, nonExisting2];
 };
 
-const generateArray = (n: number) => {
+export const generateArray = (n: number): number[] => {
   const array: number[] = [];
   const nonExisting = generateNonExisting(n);
 
@@ -29,8 +29,9 @@ const generateArray = (n: number) => {
 
 const missingNumbers: number[] = [];
 
-const findMissingNumbers = (
+export const findMissingNumbers = (
   array: number[],
+  missingNumbers: number[],
   start: number,
   end: number
 ): void => {
@@ -48,8 +49,8 @@ const findMissingNumbers = (
 
   // array is not good
   const mid = Math.floor((start + end) / 2);
-  findMissingNumbers(array, start, mid);
-  findMissingNumbers(array, mid + 1, end);
+  findMissingNumbers(array, missingNumbers, start, mid);
+  findMissingNumbers(array, missingNumbers, mid + 1, end);
   if (array[mid + 1] - array[mid] === 2) {
     missingNumbers.push(array[mid] + 1);
   }
@@ -60,7 +61,10 @@ const findMissingNumbers = (
   return;
 };
 
-const checkBorders = (array: number[]) => {
+export const checkBorders = (
+  array: number[],
+  missingNumbers: number[]
+): void => {
   if (array[0] === 2) {
     missingNumbers.push(1);
   }
@@ -77,7 +81,7 @@ const checkBorders = (array: number[]) => {
   }
 };
 
-const main = () => {
+export const main = () => {
   const array = generateArray(n);
   if (!array.length) {
     console.error("we are missing all numbers");
@@ -86,8 +90,8 @@ const main = () => {
     return;
   }
 
-  checkBorders(array);
-  findMissingNumbers(array, 0, array.length - 1);
+  checkBorders(array, missingNumbers);
+  findMissingNumbers(array, missingNumbers, 0, array.length - 1);
   console.log(missingNumbers);
 };
 

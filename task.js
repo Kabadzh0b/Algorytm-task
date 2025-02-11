@@ -1,19 +1,23 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.generateNonExisting = void 0;
 // change n to test different cases
 var n = 10;
 var generateNonExisting = function (n) {
-    //   const nonExisting1 = Math.floor(Math.random() * n) + 1;
-    //   const nonExisting2 = Math.floor(Math.random() * n) + 1;
+    var nonExisting1 = Math.floor(Math.random() * n) + 1;
+    var nonExisting2 = Math.floor(Math.random() * n) + 1;
     // case when our hidden numbers are in the borders
-    var nonExisting1 = n - 1;
-    var nonExisting2 = n;
+    //   const nonExisting1 = n - 1;
+    //   const nonExisting2 = n;
     if (nonExisting1 === nonExisting2) {
-        return generateNonExisting(n);
+        return (0, exports.generateNonExisting)(n);
     }
     return [nonExisting1, nonExisting2];
 };
+exports.generateNonExisting = generateNonExisting;
 var generateArray = function (n) {
     var array = [];
-    var nonExisting = generateNonExisting(n);
+    var nonExisting = (0, exports.generateNonExisting)(n);
     for (var i = 1; i < n + 1; i++) {
         if (nonExisting.includes(i)) {
             continue;
